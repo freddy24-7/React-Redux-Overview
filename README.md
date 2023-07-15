@@ -3,6 +3,7 @@
 This is code from the course "React - The Complete Guide (incl Hooks, React Router, Redux)" by Maximilian Schwarzmüller on Udemy.
 
 The main directory gives an overview of Redux Toolkit in a practical way, using inbuilt dummy data. This implies that there is no use of async functions in the redux setup.
+The file 02-async-firebase gives an overview of async redux functions, using a firebase backend.
 
 To run this application locally, you'll need to have Node.js and npm (Node Package Manager) installed on your machine. Follow the steps below to get started:
 
