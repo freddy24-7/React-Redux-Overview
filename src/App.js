@@ -1,23 +1,58 @@
-// Import necessary libraries and components
-import { useSelector } from 'react-redux';
+import { Fragment, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
+import Notification from './components/UI/Notification';
+import { sendCartData, fetchCartData } from './store/cart-actions';
 
-// Define the main App component
+let isInitial = true;
+
 function App() {
-    // Use the `useSelector` hook to retrieve the `cartIsVisible` property from the Redux store
-    const showCart = useSelector((state) => state.ui.cartIsVisible);
+    const dispatch = useDispatch();
 
-    // Render the Layout component, which wraps the Cart and Products components
-    // The Cart component is only rendered if `showCart` is true (i.e., the user has clicked on the cart icon)
+    // Accessing state values from the Redux store
+    const showCart = useSelector((state) => state.ui.cartIsVisible);
+    const cart = useSelector((state) => state.cart);
+    const notification = useSelector((state) => state.ui.notification);
+
+    useEffect(() => {
+        // Fetch cart data from the server when the component is mounted
+        dispatch(fetchCartData());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (isInitial) {
+            // Skip the first execution of this effect (only run after the initial render)
+            isInitial = false;
+            return;
+        }
+
+        if (cart.changed) {
+            // Send updated cart data to the server whenever the 'cart' state changes
+            dispatch(sendCartData(cart));
+        }
+    }, [cart, dispatch]);
+
     return (
-        <Layout>
-            {showCart && <Cart />}
-            <Products />
-        </Layout>
+        <Fragment>
+            {/* Conditional rendering of the 'Notification' component */}
+            {notification && (
+                <Notification
+                    status={notification.status}
+                    title={notification.title}
+                    message={notification.message}
+                />
+            )}
+            <Layout>
+                {/* Conditional rendering of the 'Cart' component */}
+                {showCart && <Cart />}
+                {/* Render the 'Products' component */}
+                <Products />
+            </Layout>
+        </Fragment>
     );
 }
 
-// Export the App component for use in other parts of the application
 export default App;
