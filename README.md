@@ -6,11 +6,9 @@ Visit the Firebase website: Go to the Firebase website at https://firebase.googl
 
 Create a new Firebase project: Once you're signed in, click on "Get started" and then click "Add project." Provide a name for your project and choose a region for your database.
 
-Enable the Realtime Database service: In your Firebase project dashboard, click on "Develop" in the left sidebar, and then choose "Database" under the "Build" section.
+Set up the Realtime Database: On the Database page, Select "Realtime Database" to continue.
 
-Set up the Realtime Database: On the Database page, you'll see options to choose between "Firestore" and "Realtime Database." Select "Realtime Database" to continue.
-
-Choose test mode: Firebase offers two modes for accessing the Realtime Database: "Locked mode" and "Test mode." For test mode, click on the "Rules" tab in the Database section and then click on the toggle switch to enable test mode.
+Choose test mode: Firebase offers two modes for accessing the Realtime Database: Choose the Test mode.
 
 Get the Firebase URL: In the Database section, you'll find a URL listed at the top of the page. It should look something like: https://your-project-name.firebaseio.com/. This URL is your Firebase URL.
 
